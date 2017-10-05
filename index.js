@@ -17,7 +17,7 @@ const defaultOptions = {
   // maximumSignificantDigits
 }
 
-function formatNum (number, opts) {
+const formatNum = (number, opts) => {
   opts = renameKeyShortcuts(Object.assign({}, defaultOptions, opts))
   number = parseNum(number)
 
@@ -30,33 +30,38 @@ function formatNum (number, opts) {
   return nf.format(number)
 }
 
-function renameKeyShortcuts (opts) {
-  // expand 'min' to 'minimum', 'max' to 'maximum'
-  Object.keys(opts).forEach(function (key) {
-    if (!key.includes('minimum') && key.startsWith('min')) {
-      opts[key.replace('min', 'minimum')] = opts[key]
-      delete opts[key]
-    }
-
-    if (!key.includes('maximum') && key.startsWith('max')) {
-      opts[key.replace('max', 'maximum')] = opts[key]
-      delete opts[key]
-    }
+const renameKeyShortcuts = (opts) => {
+  Object.keys(opts).forEach((key) => {
+    expandMin(opts, key)
+    expandMax(opts, key)
   })
 
-  Object.keys(opts).forEach(function (key) {
-    if (key.startsWith('minimum') && !key.endsWith('Digits')) {
-      opts[key + 'Digits'] = opts[key]
-      delete opts[key]
-    }
-
-    if (key.startsWith('maximum') && !key.endsWith('Digits')) {
-      opts[key + 'Digits'] = opts[key]
-      delete opts[key]
-    }
-  })
+  Object.keys(opts).forEach((key) => addDigits(opts, key))
 
   return opts
+}
+
+const expandMin = (opts, key) => expand(opts, key, 'min', 'minimum')
+const expandMax = (opts, key) => expand(opts, key, 'max', 'maximum')
+
+const expand = (opts, key, shorthand, full) => {
+  if (!key.includes(full) && key.startsWith(shorthand)) {
+    replaceKey(opts, key, key.replace(shorthand, full))
+  }
+}
+
+const addDigits = (opts, key) => {
+  if (
+    (key.startsWith('minimum') || key.startsWith('maximum')) &&
+    !key.endsWith('Digits')
+  ) {
+    replaceKey(opts, key, key + 'Digits')
+  }
+}
+
+const replaceKey = (obj, oldKey, newKey) => {
+  obj[newKey] = obj[oldKey]
+  delete obj[oldKey]
 }
 
 module.exports = formatNum

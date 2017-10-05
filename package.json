@@ -32,7 +32,7 @@
     "parse-num": "^1.0.0"
   },
   "devDependencies": {
-    "ava": "0.13.x",
+    "ava": "0.22.x",
     "standard": "6.x"
   }
 }
