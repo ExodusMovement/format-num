@@ -1,4 +1,4 @@
-1.1.0 / 2017-10-05
+UNRELEASED
 ------------------
 - refactored
 - improved unit tests
