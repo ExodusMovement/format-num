@@ -1,4 +1,5 @@
 const parseNum = require('parse-num')
+const _ = require('lodash')
 
 /* global Intl */
 
@@ -17,6 +18,11 @@ const defaultOptions = {
   // maximumSignificantDigits
 }
 
+const getNumberFormatter = _.memoize(
+  (opts) => new Intl.NumberFormat([opts.locale], opts),
+  (opts) => JSON.stringify(opts)
+)
+
 const formatNum = (number, opts) => {
   opts = renameKeyShortcuts(Object.assign({}, defaultOptions, opts))
   number = parseNum(number)
@@ -26,7 +32,7 @@ const formatNum = (number, opts) => {
     else number = 0
   }
 
-  const nf = new Intl.NumberFormat([opts.locale], Object.assign({}, opts, { style: 'decimal' }))
+  const nf = getNumberFormatter(Object.assign({}, opts, { style: 'decimal' }))
   return nf.format(number)
 }
 

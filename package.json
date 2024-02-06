@@ -29,7 +29,8 @@
   },
   "homepage": "https://github.com/exodusmovement/format-num#readme",
   "dependencies": {
-    "parse-num": "^1.0.0"
+    "parse-num": "^1.0.0",
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "ava": "0.22.x",
