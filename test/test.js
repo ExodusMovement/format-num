@@ -40,10 +40,10 @@ test('call Intl.NumberFormat correctly', (t) => {
   t.is(formatNumber(0, { minimumSignificant: 3 }).opts.minimumSignificantDigits, 3)
   t.is(formatNumber(0, { maxInteger: 3 }).opts.maximumIntegerDigits, 3)
 
-  t.deepEqual(formatNumber(0, { locale: 'ru-RU' }).locale, ['ru-RU'])
-  t.deepEqual(formatNumber(0, { locale: 'ru-RU' }).opts, {
+  t.deepEqual(formatNumber(0, { locale: 'ka-GE' }).locale, ['ka-GE'])
+  t.deepEqual(formatNumber(0, { locale: 'ka-GE' }).opts, {
     nanZero: true,
-    locale: 'ru-RU',
+    locale: 'ka-GE',
     localeMatcher: 'best fit',
     useGrouping: true,
     maximumFractionDigits: 15,
