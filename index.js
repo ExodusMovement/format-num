@@ -24,7 +24,7 @@ const getNumberFormatter = memoize(
 )
 
 const formatNum = (number, opts) => {
-  opts = renameKeyShortcuts(Object.assign({}, defaultOptions, opts))
+  opts = renameKeyShortcuts(Object.assign(Object.create(null), defaultOptions, opts))
   number = parseNum(number)
 
   if (isNaN(number)) {
