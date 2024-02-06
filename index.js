@@ -1,5 +1,5 @@
 const parseNum = require('parse-num')
-const _ = require('lodash')
+const memoize = require('lodash/memoize')
 
 /* global Intl */
 
@@ -18,7 +18,7 @@ const defaultOptions = {
   // maximumSignificantDigits
 }
 
-const getNumberFormatter = _.memoize(
+const getNumberFormatter = memoize(
   (opts) => new Intl.NumberFormat([opts.locale], opts),
   (opts) => JSON.stringify(opts)
 )
