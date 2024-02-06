@@ -32,7 +32,7 @@ const formatNum = (number, opts) => {
     else number = 0
   }
 
-  const nf = getNumberFormatter(Object.assign({}, opts, { style: 'decimal' }))
+  const nf = getNumberFormatter(Object.assign(Object.create(null), opts, { style: 'decimal' }))
   return nf.format(number)
 }
 
