@@ -32,18 +32,18 @@ test('call Intl.NumberFormat correctly', (t) => {
     this.format = () => ({ locale, opts })
   }
 
-  t.is(formatNumber(0, { maxSignificant: 2 }).opts.maximumSignificantDigits, 2)
-  t.is(formatNumber(0, { maxSignificantDigits: 2 }).opts.maximumSignificantDigits, 2)
-  t.is(formatNumber(0, { maximumSignificant: 2 }).opts.maximumSignificantDigits, 2)
-  t.is(formatNumber(0, { minSignificant: 2 }).opts.minimumSignificantDigits, 2)
-  t.is(formatNumber(0, { minSignificantDigits: 2 }).opts.minimumSignificantDigits, 2)
-  t.is(formatNumber(0, { minimumSignificant: 2 }).opts.minimumSignificantDigits, 2)
-  t.is(formatNumber(0, { maxInteger: 2 }).opts.maximumIntegerDigits, 2)
+  t.is(formatNumber(0, { maxSignificant: 3 }).opts.maximumSignificantDigits, 3)
+  t.is(formatNumber(0, { maxSignificantDigits: 3 }).opts.maximumSignificantDigits, 3)
+  t.is(formatNumber(0, { maximumSignificant: 3 }).opts.maximumSignificantDigits, 3)
+  t.is(formatNumber(0, { minSignificant: 3 }).opts.minimumSignificantDigits, 3)
+  t.is(formatNumber(0, { minSignificantDigits: 3 }).opts.minimumSignificantDigits, 3)
+  t.is(formatNumber(0, { minimumSignificant: 3 }).opts.minimumSignificantDigits, 3)
+  t.is(formatNumber(0, { maxInteger: 3 }).opts.maximumIntegerDigits, 3)
 
-  t.deepEqual(formatNumber(0).locale, ['en-US'])
-  t.deepEqual(formatNumber(0).opts, {
+  t.deepEqual(formatNumber(0, { locale: 'ka-GE' }).locale, ['ka-GE'])
+  t.deepEqual(formatNumber(0, { locale: 'ka-GE' }).opts, {
     nanZero: true,
-    locale: 'en-US',
+    locale: 'ka-GE',
     localeMatcher: 'best fit',
     useGrouping: true,
     maximumFractionDigits: 15,

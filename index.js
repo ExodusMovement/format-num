@@ -1,4 +1,5 @@
 const parseNum = require('parse-num')
+const memoize = require('lodash/memoize')
 
 /* global Intl */
 
@@ -17,8 +18,13 @@ const defaultOptions = {
   // maximumSignificantDigits
 }
 
+const getNumberFormatter = memoize(
+  (opts) => new Intl.NumberFormat([opts.locale], opts),
+  (opts) => JSON.stringify(opts)
+)
+
 const formatNum = (number, opts) => {
-  opts = renameKeyShortcuts(Object.assign({}, defaultOptions, opts))
+  opts = renameKeyShortcuts(Object.assign(Object.create(null), defaultOptions, opts))
   number = parseNum(number)
 
   if (isNaN(number)) {
@@ -26,7 +32,7 @@ const formatNum = (number, opts) => {
     else number = 0
   }
 
-  const nf = new Intl.NumberFormat([opts.locale], Object.assign({}, opts, { style: 'decimal' }))
+  const nf = getNumberFormatter(Object.assign(Object.create(null), opts, { style: 'decimal' }))
   return nf.format(number)
 }
 
