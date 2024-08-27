@@ -1,3 +1,7 @@
+## 1.2.0 / 2024-08-27
+
+- performance improvements
+
 ## 1.1.0 / 2024-02-08
 
 - performance improvements
